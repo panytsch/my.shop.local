@@ -11,7 +11,7 @@ class Template
     /**
      * @var string
      */
-    private $layout = 'layouts/main';
+    private $layout = 'main';
 
     /**
      * @var string
@@ -43,8 +43,6 @@ class Template
     public function render($template, array $variables = [])
     {
         $content = $this->renderPartial($template, $variables);
-        var_dump($variables);die();
-        return $content;
         return $this->renderPartial($this->layout, [
             'content' => $content
         ]);

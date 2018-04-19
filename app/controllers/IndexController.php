@@ -14,13 +14,19 @@ use components\web\Controller;
 
 class IndexController extends Controller
 {
-
+    /**
+     * @return string
+     */
     public function actionIndex()
     {
-//        $model = new Category();
-//        $data = $model->getArticleList();
-//        var_dump($data);
-        return $this->getTemplate()->renderPartial('index', ['content' => 'hello word']);
-    }
+        $model = new Category();
+        $categoryArray = $model->getArticleList();
 
+        $data = [];
+        foreach ($categoryArray as $value){
+            $data[$value]=$model->getTitleList($value);
+        }
+//        var_dump($data);die();
+        return $this->getTemplate()->render('index', ['categoryArray' => $data]);
+    }
 }

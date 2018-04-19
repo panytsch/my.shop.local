@@ -41,4 +41,17 @@ class ArrayHelper
             $array[$key] = $value;
         }
     }
+
+    /**
+     * @param array $array
+     * @param mixed $key
+     * @return array
+     */
+    public static function tarnsformArray(array $array, $key){
+        $data = [];
+        foreach ($array as $value){
+            $data[]=$value[$key];
+        }
+        return $data;
+    }
 }
