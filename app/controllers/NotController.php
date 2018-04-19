@@ -12,9 +12,9 @@ namespace app\controllers;
 class NotController
 {
     public function actionIndex(){
-        echo '<br>2';
+        return '<br>2';
     }
     public function actionChmo($a){
-        echo $a;
+        return $a;
     }
 }

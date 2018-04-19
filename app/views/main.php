@@ -1,5 +1,8 @@
 <?php
-
+//use helpers\SessionHelper;
+//
+//$error = SessionHelper::getFlash('error');
+//$success = SessionHelper::getFlash('success');
 
 ?>
 
@@ -14,5 +17,6 @@
 </head>
 <body>
 <h3>Main</h3>
+ <?php echo $content ?>
 </body>
 </html>

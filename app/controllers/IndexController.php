@@ -9,14 +9,18 @@
 namespace app\controllers;
 
 
-use components\Controller;
+use app\models\Category;
+use components\web\Controller;
 
 class IndexController extends Controller
 {
 
     public function actionIndex()
     {
-        echo 'here again';
+//        $model = new Category();
+//        $data = $model->getArticleList();
+//        var_dump($data);
+        return $this->getTemplate()->renderPartial('index', ['content' => 'hello word']);
     }
 
 }

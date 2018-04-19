@@ -43,6 +43,8 @@ class Template
     public function render($template, array $variables = [])
     {
         $content = $this->renderPartial($template, $variables);
+        var_dump($variables);die();
+        return $content;
         return $this->renderPartial($this->layout, [
             'content' => $content
         ]);
@@ -56,7 +58,6 @@ class Template
     public function renderPartial($template, array $variables = [])
     {
         extract($variables);
-
         $templatePath = "{$this->viewsPath}/{$template}.php";
         if (!file_exists($templatePath)) {
             $this->renderSelfError("Template '{$template}' is not defined");

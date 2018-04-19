@@ -46,7 +46,6 @@ class Router
             $action,
             $this->dispatcher->getParams()
         );
-
         return call_user_func_array([$controllerObject, $action], $parameters);
     }
 
