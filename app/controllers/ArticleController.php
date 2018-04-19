@@ -16,6 +16,7 @@ class ArticleController extends Controller
 {
     public function actionIndex()
     {
+        var_dump($_SERVER);
         return 'нічого тут поки немає';
     }
 

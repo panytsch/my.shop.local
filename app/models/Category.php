@@ -19,30 +19,15 @@ class Category extends Model
     public function __construct()
     {
         parent::__construct();
-
-    }
-
-    /**
-     * @param string $title
-     * @param string $from
-     * @return array
-     */
-
-    public function getList($title = 'name', $from = 'categories'){
-        $stm = $this->db->prepare("SELECT `{$title}` FROM `{$from}`");
-        $stm->execute();
-        $data = $stm->fetchAll();
-        $data = ArrayHelper::tarnsformArray($data, $title);
-        return $data;
+        $this->tableName = 'categories';
     }
 
     /**
      * @return array
      */
-
     public function getArticleList()
     {
-        $data = $this->getList();
+        $data = $this->getList('name');
         return $data;
     }
 

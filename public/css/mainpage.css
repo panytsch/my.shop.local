@@ -24,6 +24,7 @@ header > ul{
     display: flex;
     flex-flow: column;
     margin: 0 auto;
+    max-width: 60%;
 }
 
 
@@ -106,4 +107,8 @@ ul.submenu > li:hover > ul.sub_submenu {
     flex-grow: 1;
     flex-basis: 20%;
     margin-left: 40px;
+}
+
+img.main__logo {
+    width: 50px;
 }
