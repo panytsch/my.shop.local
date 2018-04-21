@@ -80,10 +80,25 @@ class Model
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * @param $minId
+     * @param $maxId
+     * @return array
+     */
     public function getSliceList($minId, $maxId)
     {
         $stm = $this->db->prepare("SELECT * FROM `{$this->tableName}` WHERE `{$this->tableName}`.id >= {$minId} and `{$this->tableName}`.id < {$maxId}");
         $stm->execute();
         return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @param string $field
+     * @param string $data
+     */
+    public function setField($field, $data)
+    {
+        $stm = $this->db->prepare("INSERT INTO `{$this->tableName}` (`{$field}`) VALUES ('{$data}')");
+        $stm->execute();
     }
 }

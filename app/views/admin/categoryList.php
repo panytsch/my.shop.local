@@ -1,7 +1,3 @@
-<a href="/admin/createcategory">
-    <button type="button" class="btn btn-success">Create new Article</button>
-</a>
-<br>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -18,3 +14,12 @@
     <?php }?>
     </tbody>
 </table>
+<br><br>
+
+<form class="form-inline" action="/admin/createnewcategory" method="post">
+    <div class="form-group">
+        <label for="pwd">Name:</label>
+        <input type="text" class="form-control" id="pwd" name="category">
+    </div>
+    <button type="submit" class="btn btn-default">Create Category</button>
+</form>

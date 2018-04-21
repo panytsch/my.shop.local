@@ -9,6 +9,7 @@ use components\Paginator;
 use \components\web\Application;
 use app\models\User;
 use components\web\Controller;
+use components\web\Model;
 use helpers\FilesHelper;
 use helpers\ResponseHelper;
 use helpers\SessionHelper;
@@ -144,11 +145,29 @@ class AdminController extends Controller
         ResponseHelper::redirect('/');
     }
 
+    /**
+     * @param int $min
+     * @param int $max
+     * @return string
+     */
+
     public function actionCategorylist($min=1,$max=10)
     {
         $model = new Category();
         $data = $model->getSliceList($min,$max);
         return $this->getTemplate()->render('/admin/categoryList', ['data' => $data]);
+    }
+
+    /**
+     *
+     */
+    public function actionCreatenewcategory()
+    {
+        if (!empty($_POST['category'])){
+            $model = new Category();
+            $model->setField('name', $_POST['category']);
+        }
+        ResponseHelper::redirect('/admin/categorylist');
     }
 
 }
