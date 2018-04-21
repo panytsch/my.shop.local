@@ -68,4 +68,22 @@ class Model
         $stm->execute();
     }
 
+    /**
+     * @param $minId
+     * @param $maxId
+     * @return array
+     */
+    public function getSliceListJoin($minId,$maxId,$joinTable,$keyId)
+    {
+        $stm = $this->db->prepare("SELECT * FROM `{$this->tableName}` JOIN `{$joinTable}` ON `{$this->tableName}`.{$keyId} = `{$joinTable}`.id WHERE `{$this->tableName}`.id >= {$minId} and `{$this->tableName}`.id < {$maxId}");
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getSliceList($minId, $maxId)
+    {
+        $stm = $this->db->prepare("SELECT * FROM `{$this->tableName}` WHERE `{$this->tableName}`.id >= {$minId} and `{$this->tableName}`.id < {$maxId}");
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

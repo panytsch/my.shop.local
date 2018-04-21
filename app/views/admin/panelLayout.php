@@ -18,8 +18,9 @@
         <ul class="nav navbar-nav">
             <li><a href="/">Main Page</a></li>
             <li><a href="/admin/articlelist">Article List</a></li>
-            <li><a href="#">Categories List</a></li>
+            <li><a href="/admin/categorylist">Categories List</a></li>
             <li><a href="#"></a></li>
+            <li><a href="/admin/logout">Logout</a></li>
         </ul>
     </div>
 </nav>

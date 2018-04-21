@@ -72,10 +72,10 @@ class AdminController extends Controller
      * @return string
      *
      */
-    public function actionArticlelist()
+    public function actionArticlelist($min = 1, $max = 10)
     {
         $model = new Article();
-        $data = $model->getSliceArticle(1,10);
+        $data = $model->getSliceArticle($min,$max);
 //        $data = $model->getCount('id'); //кількість всіх чогось в таблиці по переданому полю
         return $this->getTemplate()->render('/admin/articleList', ['data' => $data]);
     }
@@ -131,5 +131,20 @@ class AdminController extends Controller
         $id = (new Category())->getIdByName($_POST['category'], 'name');
         $model->setNewArticle($_POST['id'], $_POST['title'], $_POST['small_description'], $_POST['description'], $id, $_POST['tag1'], $fileName);
         ResponseHelper::redirect('/admin/articlelist');
+    }
+
+    /**
+     *
+     */
+    public function actionLogout(){
+        SessionHelper::getFlash('admin');
+        ResponseHelper::redirect('/');
+    }
+
+    public function actionCategorylist($min=1,$max=10)
+    {
+        $model = new Category();
+        $data = $model->getSliceList($min,$max);
+        return $this->getTemplate()->render('/admin/categoryList', ['data' => $data]);
     }
 }
