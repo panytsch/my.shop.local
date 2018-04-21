@@ -75,7 +75,7 @@ class AdminController extends Controller
      */
     public function actionArticlelist($page = 1)
     {
-        $itemPerPage = 5;
+        $itemPerPage = 1;
         $model = new Article();
         $data = $model->getSliceArticle(($page-1)*$itemPerPage,$itemPerPage);
         $paginator = new Paginator($model->getCount('id'),$itemPerPage, $page);

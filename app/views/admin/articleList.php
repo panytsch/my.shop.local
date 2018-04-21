@@ -32,7 +32,8 @@
     </tbody>
 </table>
 <ul class="pagination">
-    <?php foreach ($data['buttons'] as $val){ ?>
-        <li class="<?php if (!$val->isActive){echo 'active';} ?>"><a href="/admin/articlelist/?page=<?=$val->page?>"><?=$val->text?></a></li>
+    <?
+    foreach ($data['buttons'] as $val){?>
+            <li class="<?php if (!$val->isActive){echo 'active';} ?>"><a href="/admin/articlelist/?page=<?=$val->page?>"><?=$val->text?></a></li>
     <?php }?>
 </ul>
