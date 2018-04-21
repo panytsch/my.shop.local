@@ -58,4 +58,28 @@ class Article extends Model
         $stm->execute();
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * @param string $id
+     * @param string $title
+     * @param string $minDesc
+     * @param string $desc
+     * @param string $category
+     * @param string $tags
+     * @param $img
+     */
+
+    public function setNewArticle(string $id,string $title,string $minDesc,string $desc,string $category,string $tags,$img)
+    {
+        if (empty($img)){
+            $stm = $this->db->prepare("INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}')");
+        } else {
+            $stm = $this->db->prepare("INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1, img) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}', '{$img}')");
+        }
+        if (!$stm->execute()){
+            echo "INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1, img) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}', '{$img}')";
+            die();
+        }
+
+    }
 }

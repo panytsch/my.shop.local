@@ -45,4 +45,11 @@ class Category extends Model
         $data = ArrayHelper::tarnsformArray($data, 'title');
         return $data;
     }
+
+    public function getIdByName(string $name,string $field)
+    {
+        $stm = $this->db->prepare("SELECT id FROM `{$this->tableName}` WHERE `{$field}` = '{$name}'");
+        $stm->execute();
+        return $stm->fetch()[0];
+    }
 }

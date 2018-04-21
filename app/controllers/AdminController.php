@@ -75,9 +75,8 @@ class AdminController extends Controller
     public function actionArticlelist()
     {
         $model = new Article();
-        $data = $model->getSliceArticle(1,5);
+        $data = $model->getSliceArticle(1,10);
 //        $data = $model->getCount('id'); //кількість всіх чогось в таблиці по переданому полю
-//        var_dump($data);die();
         return $this->getTemplate()->render('/admin/articleList', ['data' => $data]);
     }
 
@@ -85,7 +84,6 @@ class AdminController extends Controller
      * @param $id
      * @return string
      */
-
     public function actionChangearticle($id)
     {
         $model = new Article();
@@ -95,8 +93,43 @@ class AdminController extends Controller
         return $this->getTemplate()->render('/admin/changearticle', ['data' => $data]);
     }
 
+    /*
+     * 
+     */
     public function actionUpdatearticle()
     {
-        FilesHelper::moveById(($_POST['id']), $_FILES['img']['tmp_name'], $_FILES['img']['name']);
+        $fileName = !empty($_FILES) ? $_FILES['img']['name'] : false;
+        if (!empty($fileName)){
+            FilesHelper::moveById(($_POST['id']), $_FILES['img']['tmp_name'], $fileName);
+        }
+        $model = new Article();
+        $id = (new Category())->getIdByName($_POST['category'], 'name');
+        $model->setUpdatedNew($_POST['id'], $_POST['title'], $_POST['small_description'], $_POST['description'], $id, $_POST['tag1'], $fileName);
+        ResponseHelper::redirect('/admin/articlelist');
+    }
+
+    /**
+     * @return string
+     */
+    public function actionCreatearticle()
+    {
+        $data['category'] = (new Category())->getList('name');
+        return $this->getTemplate()->render('/admin/createarticle',['data' => $data]);
+    }
+
+    /**
+     *
+     */
+
+    public function actionCreateNewArticle()
+    {
+        $fileName = !empty($_FILES) ? $_FILES['img']['name'] : false;
+        if (!empty($fileName)){
+            FilesHelper::moveById(($_POST['id']), $_FILES['img']['tmp_name'], $fileName);
+        }
+        $model = new Article();
+        $id = (new Category())->getIdByName($_POST['category'], 'name');
+        $model->setNewArticle($_POST['id'], $_POST['title'], $_POST['small_description'], $_POST['description'], $id, $_POST['tag1'], $fileName);
+        ResponseHelper::redirect('/admin/articlelist');
     }
 }

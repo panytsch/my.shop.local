@@ -47,4 +47,25 @@ class Model
         }
         return (int)$data[0][0];
     }
+
+    /**
+     * @param string $id
+     * @param string $title
+     * @param string $minDesc
+     * @param string $desc
+     * @param string $category
+     * @param string $tags
+     * @param string $img
+     * @return void
+     */
+    public function setUpdatedNew(string $id,string $title,string $minDesc,string $desc,string $category,string $tags,$img)
+    {
+        if (empty($img)){
+            $stm = $this->db->prepare("UPDATE `{$this->tableName}` SET title = '{$title}', small_description = '{$minDesc}', description = '{$desc}', category_id = '{$category}', tag1 = '{$tags}' WHERE id = {$id}");
+        } else {
+            $stm = $this->db->prepare("UPDATE `{$this->tableName}` SET title = '{$title}', small_description = '{$minDesc}', description = '{$desc}', category_id = '{$category}', tag1 = '{$tags}', img = '{$img}' WHERE id = {$id}");
+        }
+        $stm->execute();
+    }
+
 }

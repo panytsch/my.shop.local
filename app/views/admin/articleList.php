@@ -1,3 +1,7 @@
+<a href="/admin/createarticle">
+    <button type="button" class="btn btn-success">Create new Article</button>
+</a>
+<br>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -16,7 +20,7 @@
         <td><?=$val['title']?></td>
         <td><?=$val['small_description']?></td>
         <td><?=$val['tag1']?></td>
-        <td><img src="/public/upload/<?=$val['id']?>/<?=$val['img']?>" alt="Nothing" width="100px;"></td>
+        <td><img src="/public/upload/<?=$val['img']?>" alt="Nothing" width="100px;"></td>
         <td>
             <a href="/admin/changearticle/?id=<?=$val['id']?>">
             <button type="button" class="btn">Change</button></a>

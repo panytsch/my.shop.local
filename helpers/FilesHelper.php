@@ -29,11 +29,10 @@ class FilesHelper
      */
 
     public static function moveById(string $id, string $temp, string $name){
-        $targetDir = Config::get('filesStorage').$id.'/';
+        $targetDir = Config::get('filesStorage');
         if (!is_dir($targetDir)){
             mkdir($targetDir);
         }
-
         move_uploaded_file($temp, "{$targetDir}/{$name}");
     }
 }
