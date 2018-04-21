@@ -3,7 +3,7 @@
 namespace components\web;
 
 use helpers\ArrayHelper;
-
+use PDO;
 class Model
 {
     /**
@@ -31,5 +31,20 @@ class Model
         $data = $stm->fetchAll();
         $data = ArrayHelper::tarnsformArray($data, $title);
         return $data;
+    }
+
+    /**
+     * @param string $field
+     * @return null||int
+     */
+    public function getCount(string $field)
+    {
+        $stm = $this->db->prepare("SELECT COUNT({$field}) FROM `{$this->tableName}`");
+        $stm->execute();
+        $data = $stm->fetchAll(PDO::FETCH_NUM);
+        if (empty($data)){
+            return null;
+        }
+        return (int)$data[0][0];
     }
 }

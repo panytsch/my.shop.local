@@ -16,10 +16,10 @@
             <a class="navbar-brand" href="/admin">Odmen Panel</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Main Page</a></li>
-            <li><a href="#">Article List</a></li>
-            <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li>
+            <li><a href="/">Main Page</a></li>
+            <li><a href="/admin/articlelist">Article List</a></li>
+            <li><a href="#">Categories List</a></li>
+            <li><a href="#"></a></li>
         </ul>
     </div>
 </nav>

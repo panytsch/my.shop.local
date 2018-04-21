@@ -1,6 +1,7 @@
 <?php
 
 namespace helpers;
+use components\Config;
 
 /**
  * Class FilesHelper
@@ -19,5 +20,20 @@ class FilesHelper
         return array_filter(scandir($dir), function ($item) use ($skip) {
             return !in_array($item, $skip);
         });
+    }
+
+    /**
+     * @param string $id
+     * @param string $temp
+     * @param string $name
+     */
+
+    public static function moveById(string $id, string $temp, string $name){
+        $targetDir = Config::get('filesStorage').$id.'/';
+        if (!is_dir($targetDir)){
+            mkdir($targetDir);
+        }
+
+        move_uploaded_file($temp, "{$targetDir}/{$name}");
     }
 }
