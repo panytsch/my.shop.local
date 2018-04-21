@@ -16,7 +16,6 @@ class Controller extends \components\Controller
      */
     protected function getTemplate()
     {
-        Application::getTemplate()->setLayout('main');
         return Application::getTemplate();
     }
 }
