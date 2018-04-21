@@ -54,7 +54,7 @@ class Article extends Model
      */
     public function getSliceArticle(int $minId, int $maxId)
     {
-        $stm = $this->db->prepare("SELECT `{$this->tableName}`.id, `{$this->tableName}`.title, `{$this->tableName}`.small_description, `{$this->tableName}`.description, `{$this->tableName}`.tag1,  `{$this->tableName}`.img, categories.name FROM `{$this->tableName}` JOIN categories ON `{$this->tableName}`.category_id = categories.id WHERE `{$this->tableName}`.id >= {$minId} and `{$this->tableName}`.id < {$maxId}");
+        $stm = $this->db->prepare("SELECT `{$this->tableName}`.id, `{$this->tableName}`.title, `{$this->tableName}`.small_description, `{$this->tableName}`.description, `{$this->tableName}`.tag1,  `{$this->tableName}`.img, categories.name FROM `{$this->tableName}` JOIN categories ON `{$this->tableName}`.category_id = categories.id LIMIT {$minId}, {$maxId}");
         $stm->execute();
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -78,7 +78,6 @@ class Article extends Model
         }
         if (!$stm->execute()){
             echo "INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1, img) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}', '{$img}')";
-            die();
         }
 
     }

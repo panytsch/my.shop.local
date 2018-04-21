@@ -5,6 +5,7 @@ namespace app\controllers;
 
 use app\models\Article;
 use app\models\Category;
+use components\Paginator;
 use \components\web\Application;
 use app\models\User;
 use components\web\Controller;
@@ -72,11 +73,13 @@ class AdminController extends Controller
      * @return string
      *
      */
-    public function actionArticlelist($min = 1, $max = 10)
+    public function actionArticlelist($page = 1)
     {
+        $itemPerPage = 5;
         $model = new Article();
-        $data = $model->getSliceArticle($min,$max);
-//        $data = $model->getCount('id'); //кількість всіх чогось в таблиці по переданому полю
+        $data = $model->getSliceArticle(($page-1)*$itemPerPage,$itemPerPage);
+        $paginator = new Paginator($model->getCount('id'),$itemPerPage, $page);
+        $data['buttons'] = $paginator->buttons;
         return $this->getTemplate()->render('/admin/articleList', ['data' => $data]);
     }
 
@@ -147,4 +150,5 @@ class AdminController extends Controller
         $data = $model->getSliceList($min,$max);
         return $this->getTemplate()->render('/admin/categoryList', ['data' => $data]);
     }
+
 }
