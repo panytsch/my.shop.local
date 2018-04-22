@@ -21,9 +21,9 @@ class ArticleController extends Controller
     }
 
 
-    public function actionNews($name = null){
+    public function actionNews($id = null){
         $model = new Article();
-        $data = $model->getArticle($name);
+        $data = $model->getArticle($id);
         return $this->getTemplate()->render('article/list', ['data' => $data]);
     }
 }

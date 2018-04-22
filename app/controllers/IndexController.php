@@ -26,7 +26,6 @@ class IndexController extends Controller
         foreach ($categoryArray as $value){
             $data[$value]=$model->getTitleList($value);
         }
-//        var_dump($data);die();
         return $this->getTemplate()->render('index', ['categoryArray' => $data]);
     }
 }

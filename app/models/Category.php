@@ -5,6 +5,7 @@ namespace app\models;
 
 use components\web\Model;
 use helpers\ArrayHelper;
+use PDO;
 
 /**
  * Class Category
@@ -38,11 +39,9 @@ class Category extends Model
 
     public function getTitleList($category = 'Інтернет')
     {
-        $stm = $this->db->prepare("SELECT articles.title, categories.name FROM articles JOIN categories ON articles.category_id = categories.id WHERE categories.name = '{$category}' LIMIT 5");
+        $stm = $this->db->prepare("SELECT articles.title, articles.id, categories.name FROM articles JOIN categories ON articles.category_id = categories.id WHERE categories.name = '{$category}' LIMIT 5");
         $stm->execute();
-        $data = $stm->fetchAll();
-
-        $data = ArrayHelper::tarnsformArray($data, 'title');
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 

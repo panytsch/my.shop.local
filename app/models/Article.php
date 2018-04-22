@@ -30,7 +30,7 @@ class Article extends Model
      */
     public function getArticle($name)
     {
-        $stm = $this->db->prepare("SELECT * FROM `{$this->tableName}` WHERE `title` LIKE '{$name}'");
+        $stm = $this->db->prepare("SELECT * FROM `{$this->tableName}` WHERE `id` = {$name}");
         $stm->execute();
         return $stm->fetch(PDO::FETCH_ASSOC);
     }
