@@ -22,6 +22,7 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->getTemplate()->setLayout('admin/panelLayout');
+
     }
 
     /**
@@ -67,6 +68,9 @@ class AdminController extends Controller
      */
     public function actionPanel()
     {
+        if (SessionHelper::getFlash('admin', false) == false){
+            ResponseHelper::redirect('/admin');
+        }
         return $this->getTemplate()->render('/admin/panelIndex');
     }
 
@@ -76,7 +80,10 @@ class AdminController extends Controller
      */
     public function actionArticlelist($page = 1)
     {
-        $itemPerPage = 1;
+        if (SessionHelper::getFlash('admin', false) == false){
+            ResponseHelper::redirect('/admin');
+        }
+        $itemPerPage = 5;
         $model = new Article();
         $data = $model->getSliceArticle(($page-1)*$itemPerPage,$itemPerPage);
         $paginator = new Paginator($model->getCount('id'),$itemPerPage, $page);
@@ -90,6 +97,9 @@ class AdminController extends Controller
      */
     public function actionChangearticle($id)
     {
+        if (SessionHelper::getFlash('admin', false) == false){
+            ResponseHelper::redirect('/admin');
+        }
         $model = new Article();
         $id  = (int)$id;
         $data = $model->getArticlebyID($id);
@@ -102,6 +112,9 @@ class AdminController extends Controller
      */
     public function actionUpdatearticle()
     {
+        if (SessionHelper::getFlash('admin', false) == false){
+            ResponseHelper::redirect('/admin');
+        }
         $fileName = !empty($_FILES) ? $_FILES['img']['name'] : false;
         if (!empty($fileName)){
             FilesHelper::moveById(($_POST['id']), $_FILES['img']['tmp_name'], $fileName);
@@ -117,6 +130,9 @@ class AdminController extends Controller
      */
     public function actionCreatearticle()
     {
+        if (SessionHelper::getFlash('admin', false) == false){
+            ResponseHelper::redirect('/admin');
+        }
         $data['category'] = (new Category())->getList('name');
         return $this->getTemplate()->render('/admin/createarticle',['data' => $data]);
     }
@@ -127,6 +143,9 @@ class AdminController extends Controller
 
     public function actionCreateNewArticle()
     {
+        if (SessionHelper::getFlash('admin', false) == false){
+            ResponseHelper::redirect('/admin');
+        }
         $fileName = !empty($_FILES) ? $_FILES['img']['name'] : false;
         if (!empty($fileName)){
             FilesHelper::moveById(($_POST['id']), $_FILES['img']['tmp_name'], $fileName);
@@ -153,6 +172,9 @@ class AdminController extends Controller
 
     public function actionCategorylist($min=1,$max=10)
     {
+        if (SessionHelper::getFlash('admin', false) == false){
+            ResponseHelper::redirect('/admin');
+        }
         $model = new Category();
         $data = $model->getSliceList($min,$max);
         return $this->getTemplate()->render('/admin/categoryList', ['data' => $data]);
@@ -163,6 +185,9 @@ class AdminController extends Controller
      */
     public function actionCreatenewcategory()
     {
+        if (SessionHelper::getFlash('admin', false) == false){
+            ResponseHelper::redirect('/admin');
+        }
         if (!empty($_POST['category'])){
             $model = new Category();
             $model->setField('name', $_POST['category']);

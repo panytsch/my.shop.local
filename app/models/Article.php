@@ -60,6 +60,19 @@ class Article extends Model
     }
 
     /**
+     * @param int $minId
+     * @param int $maxId
+     * @param string $category
+     * @return array
+     */
+    public function getSliceArticleByCategory(int $minId, int $maxId,string $category)
+    {
+        $stm = $this->db->prepare("SELECT `{$this->tableName}`.id, `{$this->tableName}`.title, `{$this->tableName}`.img, categories.name FROM `{$this->tableName}` JOIN categories ON `{$this->tableName}`.category_id = categories.id AND categories.name = '{$category}' LIMIT {$minId}, {$maxId}");
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * @param string $id
      * @param string $title
      * @param string $minDesc

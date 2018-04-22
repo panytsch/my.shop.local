@@ -49,6 +49,21 @@ class Model
     }
 
     /**
+     * @param string $field
+     * @return int|null
+     */
+    public function getCountForCategory(string $field)
+    {
+        $stm = $this->db->prepare("SELECT COUNT(articles.id) FROM articles JOIN categories ON categories.id = articles.category_id WHERE categories.name = '{$field}'");
+        $stm->execute();
+        $data = $stm->fetchAll(PDO::FETCH_NUM);
+        if (empty($data)){
+            return null;
+        }
+        return (int)$data[0][0];
+    }
+
+    /**
      * @param string $id
      * @param string $title
      * @param string $minDesc

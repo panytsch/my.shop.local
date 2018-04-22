@@ -13,6 +13,18 @@ class Paginator
      * @var array
      */
     public $buttons = array();
+    /**
+     * @var int
+     */
+    private $itemsCount;
+    /**
+     * @var int
+     */
+    private $itemsPerPage;
+    /**
+     * @var float|int
+     */
+    private $currentPage;
 
     /**
      * Paginator constructor.
@@ -20,7 +32,6 @@ class Paginator
      * @param int $itemsPerPage
      * @param int $currentPage
      */
-
     public function __construct(int $itemsCount,int $itemsPerPage = 5,int $currentPage = 1)
     {
         if (!$currentPage) {
@@ -42,5 +53,8 @@ class Paginator
             $this->buttons[] = new Button($i, $active);
         }
 
+        $this->itemsCount = $itemsCount;
+        $this->itemsPerPage = $itemsPerPage;
+        $this->currentPage = $currentPage;
     }
 }
