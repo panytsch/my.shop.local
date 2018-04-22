@@ -25,6 +25,15 @@ class Article extends Model
     }
 
     /**
+     * @param $id
+     */
+    public function setView($id)
+    {
+        $stm = $this->db->prepare("UPDATE `{$this->tableName}` SET `views` = `views` + 1 WHERE `id` = {$id}");
+        $stm->execute();
+    }
+
+    /**
      * @param $name
      * @return mixed
      */

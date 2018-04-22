@@ -23,6 +23,7 @@ class ArticleController extends Controller
     public function actionNews($id = null){
         $model = new Article();
         $data = $model->getArticle($id);
+        $model->setView($id);
         return $this->getTemplate()->render('article/list', ['data' => $data]);
     }
 

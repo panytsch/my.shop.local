@@ -41,4 +41,21 @@ class User extends Model
             return null;
         }
     }
+
+    /**
+     * @param $pass
+     * @param $email
+     * @return array|null
+     */
+    public function getUser($pass, $email)
+    {
+        $stm = $this->db->prepare("SELECT * FROM users WHERE users.password = '{$pass}' AND users.email = '{$email}'");
+        $stm->execute();
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($data)){
+            return $data[0];
+        } else {
+            return null;
+        }
+    }
 }
