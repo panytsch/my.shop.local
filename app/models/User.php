@@ -65,4 +65,30 @@ class User extends Model
             return null;
         }
     }
+
+    /**
+     * @param $email
+     * @return bool
+     */
+    public function checkUser($email)
+    {
+        $stm = $this->db->prepare("SELECT * FROM users WHERE email = '{$email}'");
+        $stm->execute();
+        return !empty($stm->fetchAll(PDO::FETCH_ASSOC));
+    }
+
+    /**
+     * @param $pass
+     * @param $email
+     * @return bool
+     */
+    public function setUser($pass, $email)
+    {
+        if ($this->checkUser($email)){
+            return false;
+        }
+        $pass = password_hash($pass,PASSWORD_DEFAULT);
+        $stm = $this->db->prepare("INSERT INTO `users` (`email`, `password`, `permission_id`) VALUES ('{$email}', '{$pass}', '3')");
+        return $stm->execute();
+    }
 }

@@ -45,9 +45,45 @@ class UserController extends Controller
         }
     }
 
+    /**
+     *
+     */
+    public function actionCheckreg()
+    {
+        $array = $_POST;
+        if (empty($array['email']) || empty($array['password']) || empty($array['repassword']) || ($array['repassword'] !== $array['password']) ){
+            SessionHelper::addFlash('error','Your data is wrong');
+            ResponseHelper::redirect('/user/login', 301);
+        } else {
+            $model = new User();
+            $data = $model->setUser($array['password'],$array['email']);
+            if (!$data){
+                SessionHelper::addFlash('error','Something wrong');
+                ResponseHelper::redirect('/user/registration', 301);
+            } else {
+                SessionHelper::addFlash('user', true);
+                ResponseHelper::redirect('/');
+            }
+        }
+    }
+
+    /**
+     *
+     */
     public function actionLogout()
     {
         SessionHelper::getFlash('user');
         ResponseHelper::redirect('/');
+    }
+
+    /**
+     * @return string
+     */
+    public function actionRegistration()
+    {
+        if (SessionHelper::getFlash('user',false)===true){
+            ResponseHelper::redirect('/');
+        }
+        return $this->getTemplate()->render('/user/registration');
     }
 }

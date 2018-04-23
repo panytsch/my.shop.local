@@ -47,7 +47,7 @@ $success = SessionHelper::getFlash('success');
                     <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Hello dude</a></li>
                     <li><a href="/user/logout"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
                 <?php } else {?>
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="/user/registration"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a href="user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 <?php } ?>
             </ul>
