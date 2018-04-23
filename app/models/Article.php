@@ -93,13 +93,15 @@ class Article extends Model
 
     public function setNewArticle(string $id,string $title,string $minDesc,string $desc,string $category,string $tags,$img)
     {
+//        $date = date("Y-m-d H:i:s");
+//        var_dump($date);
         if (empty($img)){
-            $stm = $this->db->prepare("INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}')");
+            $stm = $this->db->prepare("INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1, `date`) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}', NOW())");
         } else {
-            $stm = $this->db->prepare("INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1, img) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}', '{$img}')");
+            $stm = $this->db->prepare("INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1, img, `date`) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}', '{$img}', NOW())");
         }
         if (!$stm->execute()){
-            echo "INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1, img) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}', '{$img}')";
+            echo "INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1, img, `date`) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}', '{$img}', NOW())";
         }
 
     }
