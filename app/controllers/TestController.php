@@ -11,6 +11,10 @@ class TestController
      */
     public function actionIndex($test=0)
     {
-        var_dump((new DateTime())->getTimestamp());
+        $string = 'smile3';
+        $hash = password_hash($string, PASSWORD_DEFAULT);
+//        var_dump(password_verify($string,$hash));
+        echo $hash;
     }
+
 }

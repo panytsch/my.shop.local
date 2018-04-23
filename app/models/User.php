@@ -32,10 +32,13 @@ class User extends Model
      */
     public function getUserData(string $email, string $password)
     {
-        $stm = $this->db->prepare("SELECT `{$this->tableName}`.email, `{$this->tableName}`.password, `permission`.type FROM `{$this->tableName}` JOIN `permission` ON `{$this->tableName}`.permission_id = `permission`.id AND (permission.type = 'admin' OR permission.type = 'moderator') AND users.email = '{$email}' AND users.password = '{$password}'");
+        $stm = $this->db->prepare("SELECT `{$this->tableName}`.email, `{$this->tableName}`.password, `permission`.type FROM `{$this->tableName}` JOIN `permission` ON `{$this->tableName}`.permission_id = `permission`.id AND (permission.type = 'admin' OR permission.type = 'moderator') AND users.email = '{$email}'");
         $stm->execute();
         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
         if (!empty($data)){
+            if(!password_verify($password,$data[0]['password'])){
+                return null;
+            }
             return $data[0];
         } else {
             return null;
@@ -49,10 +52,14 @@ class User extends Model
      */
     public function getUser($pass, $email)
     {
-        $stm = $this->db->prepare("SELECT * FROM users WHERE users.password = '{$pass}' AND users.email = '{$email}'");
+//        $pass = password_hash($pass, PASSWORD_DEFAULT);
+        $stm = $this->db->prepare("SELECT * FROM users WHERE users.email = '{$email}'");
         $stm->execute();
         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
         if (!empty($data)){
+            if(!password_verify($pass,$data[0]['password'])){
+                return null;
+            }
             return $data[0];
         } else {
             return null;
