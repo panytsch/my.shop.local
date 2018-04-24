@@ -33,7 +33,7 @@ class AdminController extends Controller
         if (SessionHelper::getFlash('admin', false) === true){
             return $this->actionPanel();
         } else {
-            return $this->getTemplate()->renderPartial('/admin/login');
+            return $this->getTemplate()->render('/admin/login');
         }
     }
 

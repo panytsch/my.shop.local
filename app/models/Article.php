@@ -96,7 +96,7 @@ class Article extends Model
 //        $date = date("Y-m-d H:i:s");
 //        var_dump($date);
         if (empty($img)){
-            $stm = $this->db->prepare("INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1, `date`) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}', NOW())");
+            $stm = $this->db->prepare("INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1, img, `date`) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}', 'image-not-found.jpg',NOW())");
         } else {
             $stm = $this->db->prepare("INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1, img, `date`) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}', '{$img}', NOW())");
         }
@@ -104,5 +104,15 @@ class Article extends Model
             echo "INSERT INTO `{$this->tableName}` (title, small_description, description, category_id, tag1, img, `date`) VALUES ('{$title}', '{$minDesc}', '{$desc}', '{$category}', '{$tags}', '{$img}', NOW())";
         }
 
+    }
+
+    /**
+     * @return array
+     */
+    public function getLastThreeArticle()
+    {
+        $stm = $this->db->prepare("SELECT * FROM `articles` ORDER BY date DESC LIMIT 3");
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
 }

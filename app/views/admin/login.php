@@ -1,10 +1,17 @@
-<a href="/">Go to Home Page</a>
-<br><br>
-<form action="admin/login" method="post">
-    <input type="email" placeholder="enter your email" name="email" required><br><br>
-    <input type="password" placeholder="enter your password" name="password" required><br><br>
-    <input type="password" placeholder="enter your password again" name="repassword" required><br><br>
-    <button type="submit">Check</button>
+<form action="/admin/login" method="post">
+    <div class="form-group">
+        <label for="email">Email address:</label>
+        <input type="email" class="form-control" id="email" name="email">
+    </div>
+    <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" id="pwd" name="password">
+    </div>
+    <div class="form-group">
+        <label for="pwd">Password again:</label>
+        <input type="password" class="form-control" id="pwd" name="repassword">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
 </form>
 
 <?php

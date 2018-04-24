@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: romeo
- * Date: 22.04.2018
- * Time: 17:21
- */
 
 namespace app\controllers;
 
@@ -40,6 +34,7 @@ class UserController extends Controller
                 ResponseHelper::redirect('/user/login', 301);
             } else {
                 SessionHelper::addFlash('user', true);
+                SessionHelper::addFlash('userId',$data['id']);
                 ResponseHelper::redirect('/');
             }
         }
@@ -73,6 +68,7 @@ class UserController extends Controller
     public function actionLogout()
     {
         SessionHelper::getFlash('user');
+        SessionHelper::getFlash('userId');
         ResponseHelper::redirect('/');
     }
 

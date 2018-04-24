@@ -74,7 +74,8 @@ class User extends Model
     {
         $stm = $this->db->prepare("SELECT * FROM users WHERE email = '{$email}'");
         $stm->execute();
-        return !empty($stm->fetchAll(PDO::FETCH_ASSOC));
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+        return $data[0];
     }
 
     /**
@@ -84,7 +85,7 @@ class User extends Model
      */
     public function setUser($pass, $email)
     {
-        if ($this->checkUser($email)){
+        if (!empty($this->checkUser($email))){
             return false;
         }
         $pass = password_hash($pass,PASSWORD_DEFAULT);
