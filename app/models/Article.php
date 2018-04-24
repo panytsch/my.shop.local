@@ -93,6 +93,35 @@ class Article extends Model
     }
 
     /**
+     * @param int $minId
+     * @param int $maxId
+     * @return array
+     */
+    public function getSliceAnalitic(int $minId, int $maxId)
+    {
+        $stm = $this->db->prepare("SELECT `{$this->tableName}`.id, `{$this->tableName}`.title, `{$this->tableName}`.img, categories.name FROM `{$this->tableName}` JOIN categories ON `{$this->tableName}`.category_id = categories.id AND articles.analitic = 1 LIMIT {$minId}, {$maxId}");
+        $stm->execute();
+//        echo "SELECT `{$this->tableName}`.id, `{$this->tableName}`.title, `{$this->tableName}`.img, categories.name FROM `{$this->tableName}` JOIN categories ON `{$this->tableName}`.category_id = categories.id AND article.analitic = 1 LIMIT {$minId}, {$maxId}";
+//        var_dump($stm->fetchAll(PDO::FETCH_ASSOC));
+//        die();
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getCountAnalitic()
+    {
+        $stm = $this->db->prepare("SELECT COUNT(articles.analitic) FROM articles WHERE articles.analitic = 1");
+        $stm->execute();
+        $data = $stm->fetchAll(PDO::FETCH_NUM);
+        if (empty($data)){
+            return null;
+        }
+        return (int)$data[0][0];
+    }
+
+    /**
      * @param string $id
      * @param string $title
      * @param string $minDesc
@@ -101,7 +130,6 @@ class Article extends Model
      * @param string $tags
      * @param $img
      */
-
     public function setNewArticle(string $id,string $title,string $minDesc,string $desc,string $category,string $tags,$img)
     {
 //        $date = date("Y-m-d H:i:s");

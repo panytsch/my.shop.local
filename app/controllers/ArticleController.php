@@ -5,6 +5,7 @@ namespace app\controllers;
 use components\Paginator;
 use components\web\Controller;
 use app\models\Article;
+use helpers\SessionHelper;
 
 class ArticleController extends Controller
 {
@@ -24,6 +25,9 @@ class ArticleController extends Controller
         $model = new Article();
         $data = $model->getArticle($id);
         $model->setView($id);
+        if (SessionHelper::getFlash('admin', false) == false || SessionHelper::getFlash('user', false) == false){
+            $data['description'] = substr($data['description'],0,350).'...(<a href="/user/login">login to continue</a>)';
+        }
         return $this->getTemplate()->render('article/list', ['data' => $data]);
     }
 
@@ -32,15 +36,13 @@ class ArticleController extends Controller
      * @param string $category
      * @return string
      */
-    public function actionCategories($page = 1,$category = 'Інтернет')
+    public function actionCategories($page = 1,$category = 'Internet')
     {
         $itemPerPage = 5;
         $modelA = new Article();
         $data = $modelA->getSliceArticleByCategory(($page-1)*$itemPerPage,$itemPerPage,$category);
         $paginator = new Paginator($modelA->getCountForCategory($category),$itemPerPage, $page);
         $data['buttons'] = $paginator->buttons;
-//        var_dump($data);die();
-//        var_dump($data[0]['img']);die();
         return $this->getTemplate()->render('/category/categoryList', ['data' => $data]);
     }
 
@@ -53,5 +55,20 @@ class ArticleController extends Controller
         $model = new Article();
         $articleList = $model->getArticleListByTag($tag);
         return $this->getTemplate()->render('/article/listByTag',['articleList' => $articleList]);
+    }
+
+    /**
+     * @param int $page
+     * @return string
+     */
+    public function actionAnalitic($page = 1)
+    {
+        $itemPerPage = 5;
+        $modelA = new Article();
+        $data = $modelA->getSliceAnalitic(($page-1)*$itemPerPage,$itemPerPage);
+//        var_dump($data);die();
+        $paginator = new Paginator($modelA->getCountAnalitic(),$itemPerPage, $page);
+        $data['buttons'] = $paginator->buttons;
+        return $this->getTemplate()->render('/category/analitic', ['data' => $data]);
     }
 }

@@ -9,4 +9,6 @@ $config = array_merge(
     require_once __DIR__ . '/../configs/main.php',
     require_once __DIR__ . '/../configs/web.php'
 );
+header('Content-Type: text/html; charset=utf-8');
+
 echo (new components\web\Application($config))->run();
