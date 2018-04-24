@@ -2,6 +2,7 @@
 
 namespace components\web;
 
+use app\models\Color;
 use Exception;
 use exceptions\NotAuthorisedException;
 use components\Config;
@@ -17,6 +18,7 @@ class Application extends \components\Application
     public function run()
     {
         $dispatcher = new Dispatcher();
+        define('COLOR', (new Color())->getColor());
         try {
             return (new Router($dispatcher))->init();
         } catch (NotAuthorisedException $exception) {

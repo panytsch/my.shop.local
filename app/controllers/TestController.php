@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Color;
 use DateTime;
 
 class TestController
@@ -11,10 +12,7 @@ class TestController
      */
     public function actionIndex($test=0)
     {
-        $string = 'smile3';
-        $hash = password_hash($string, PASSWORD_DEFAULT);
-//        var_dump(password_verify($string,$hash));
-        echo $hash;
+        echo (new Color())->getColor();
     }
 
 }

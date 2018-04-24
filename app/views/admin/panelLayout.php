@@ -19,7 +19,7 @@
             <li><a href="/">Main Page</a></li>
             <li><a href="/admin/articlelist">Article List</a></li>
             <li><a href="/admin/categorylist">Categories List</a></li>
-            <li><a href="#"></a></li>
+            <li><a href="/admin/color">Set Color</a></li>
             <li><a href="/admin/logout">Logout</a></li>
         </ul>
     </div>

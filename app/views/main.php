@@ -24,7 +24,9 @@ $success = SessionHelper::getFlash('success');
 //        };
     </script>
 </head>
-<body>
+<body style="background-color: <?=COLOR?>">
+<?//=$color?>
+<!--<body >-->
 <header>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">

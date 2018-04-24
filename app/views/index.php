@@ -1,4 +1,4 @@
-<h2>Carousel Example</h2>
+<h2>Last News</h2>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">

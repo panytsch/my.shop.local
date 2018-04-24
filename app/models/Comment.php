@@ -11,5 +11,12 @@ use components\web\Model;
  */
 class Comment extends Model
 {
-
+    /**
+     * Comment constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->tableName = 'comments';
+    }
 }

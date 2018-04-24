@@ -5,6 +5,7 @@ namespace app\controllers;
 
 use app\models\Article;
 use app\models\Category;
+use app\models\Color;
 use components\Paginator;
 use \components\web\Application;
 use app\models\User;
@@ -23,6 +24,28 @@ class AdminController extends Controller
     {
         $this->getTemplate()->setLayout('admin/panelLayout');
 
+    }
+
+    /**
+     * @return string
+     */
+    public function actionColor()
+    {
+        return $this->getTemplate()->render('/admin/color');
+    }
+
+    /**
+     *
+     */
+    public function actionSetcolor()
+    {
+        if (empty($_POST) && empty($_POST['color'])){
+            ResponseHelper::redirect('/admin/color');
+        } else {
+            $model = new Color();
+            $model->setColor($_POST['color']);
+            ResponseHelper::redirect('/admin');
+        }
     }
 
     /**

@@ -2,13 +2,14 @@
 
 namespace app\controllers;
 
-
+use app\models\Color;
 use app\models\Article;
 use app\models\Category;
 use components\web\Controller;
 
 class IndexController extends Controller
 {
+
     /**
      * @return string
      */
