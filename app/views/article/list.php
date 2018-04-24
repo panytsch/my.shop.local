@@ -5,7 +5,11 @@
     <p><?=$data['description']?></p>
     <p><?=$data['date']?></p>
 <!--    <p>--><?//=$data['category']?><!--</p>-->
-    <p><?=$data['tag1']?></p>
+    <p>
+        <?php foreach (mb_split('\s', $data['tag1']) as $val){ ?>
+            <a href="/article/taglist?tag=<?=$val?>"><?=$val?></a>
+        <?php }?>
+    </p>
     <p><?=$data['views']?></p>
     <p>Right now watch except you: <span id="randomField">0</span></p>
 </div>

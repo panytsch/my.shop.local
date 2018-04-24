@@ -43,4 +43,15 @@ class ArticleController extends Controller
 //        var_dump($data[0]['img']);die();
         return $this->getTemplate()->render('/category/categoryList', ['data' => $data]);
     }
+
+    /**
+     * @param string $tag
+     * @return string
+     */
+    public function actionTaglist($tag = 'lorem')
+    {
+        $model = new Article();
+        $articleList = $model->getArticleListByTag($tag);
+        return $this->getTemplate()->render('/article/listByTag',['articleList' => $articleList]);
+    }
 }

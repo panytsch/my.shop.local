@@ -69,6 +69,17 @@ class Article extends Model
     }
 
     /**
+     * @param string $tag
+     * @return array
+     */
+    public function getArticleListByTag(string $tag)
+    {
+        $stm = $this->db->prepare("SELECT * FROM `{$this->tableName}` WHERE tag1 LIKE '%{$tag}%'");
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * @param int $minId
      * @param int $maxId
      * @param string $category

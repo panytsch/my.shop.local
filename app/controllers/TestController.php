@@ -12,7 +12,8 @@ class TestController
      */
     public function actionIndex($test=0)
     {
-        echo (new Color())->getColor();
+        $a = 'tag tag2 tag3';
+        var_dump(mb_split('\s', $a));
     }
 
 }
