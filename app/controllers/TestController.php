@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Color;
+use app\models\Comment;
 use DateTime;
 
 class TestController
@@ -12,8 +13,7 @@ class TestController
      */
     public function actionIndex($test=0)
     {
-        $a = 'tag tag2 tag3';
-        var_dump(mb_split('\s', $a));
+        var_dump((new Comment())->getCommentsForArticle(3));
     }
 
 }

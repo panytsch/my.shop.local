@@ -2,9 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\Comment;
 use components\Paginator;
 use components\web\Controller;
 use app\models\Article;
+use helpers\ResponseHelper;
 use helpers\SessionHelper;
 
 class ArticleController extends Controller
@@ -28,7 +30,20 @@ class ArticleController extends Controller
         if (SessionHelper::getFlash('admin', false) == false || SessionHelper::getFlash('user', false) == false){
             $data['description'] = substr($data['description'],0,350).'...(<a href="/user/login">login to continue</a>)';
         }
+        $data['comments'] = (new Comment())->getCommentsForArticle($id);
         return $this->getTemplate()->render('article/list', ['data' => $data]);
+    }
+
+    /**
+     *
+     */
+    public function actionVote()
+    {
+        if (SessionHelper::getFlash('admin', false) == true || SessionHelper::getFlash('user', true) == false){
+            $model = new Comment();
+            $model->setRate($_POST['action'], $_POST['id']);
+        }
+        ResponseHelper::redirect($_POST['refer']);
     }
 
     /**
