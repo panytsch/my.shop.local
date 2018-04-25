@@ -39,8 +39,8 @@ class ArticleController extends Controller
      */
     public function actionVote()
     {
-        if (SessionHelper::getFlash('admin', false) == true || SessionHelper::getFlash('user', true) == false){
-            $model = new Comment();
+        if (SessionHelper::getFlash('admin', false) == true || SessionHelper::getFlash('user', false) == true){
+            $model = new Comment();cd ht    
             $model->setRate($_POST['action'], $_POST['id']);
         }
         ResponseHelper::redirect($_POST['refer']);
