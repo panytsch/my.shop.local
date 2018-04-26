@@ -8,6 +8,7 @@ use components\web\Controller;
 use app\models\Article;
 use helpers\ResponseHelper;
 use helpers\SessionHelper;
+use helpers\StringHelper;
 
 class ArticleController extends Controller
 {
@@ -34,13 +35,25 @@ class ArticleController extends Controller
         return $this->getTemplate()->render('article/list', ['data' => $data]);
     }
 
+    public function actionAddcomment()
+    {
+        $comment = trim($_POST['comment']);
+//        var_dump($comment);die();
+        if ($comment){
+            $model = new Comment();
+            $model->setComment($_POST['refer'], $comment, SessionHelper::getFlash('userId', false));
+        }
+        ResponseHelper::redirect("/article/news/?id={$_POST['refer']}");
+
+    }
+
     /**
      *
      */
     public function actionVote()
     {
         if (SessionHelper::getFlash('admin', false) == true || SessionHelper::getFlash('user', false) == true){
-            $model = new Comment();cd ht    
+            $model = new Comment();
             $model->setRate($_POST['action'], $_POST['id']);
         }
         ResponseHelper::redirect($_POST['refer']);

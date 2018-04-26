@@ -40,4 +40,16 @@ class Comment extends Model
         }
         $stm->execute();
     }
+
+    /**
+     * @param $idArticle
+     * @param $comment
+     * @param $idUser
+     * @return void
+     */
+    public function setComment($idArticle, $comment, $idUser)
+    {
+        $stm = $this->db->prepare("INSERT INTO `{$this->tableName}` (`article_id`, `comment`, `user_id`, `date`) VALUES ({$idArticle}, '{$comment}', {$idUser}, NOW())");
+        $stm->execute();
+    }
 }

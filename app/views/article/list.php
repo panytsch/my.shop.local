@@ -13,6 +13,21 @@
     <p><?=$data['views']?></p>
     <p>Right now watch except you: <span id="randomField">0</span></p>
 </div>
+
+<?php
+if (\helpers\SessionHelper::getFlash('user', false)){ ?>
+<form action="/article/addcomment" method="post">
+    <div class="form-group">
+        <label for="comment">Comment:</label>
+        <textarea class="form-control" rows="5" id="comment" name="comment" placeholder="Enter your comment here">
+
+        </textarea>
+    </div>
+    <input type="hidden" value="<?=$data['id']?>" name="refer">
+    <button type="submit">Send</button>
+</form>
+<?php } ?>
+
 <?php
 foreach ($data['comments'] as $comment) { ?>
     <div class="media">

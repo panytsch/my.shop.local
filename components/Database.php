@@ -64,7 +64,7 @@ class Database
     public function getConnection()
     {
         if ($this->connection === null) {
-            $this->connection = new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->password);
+            $this->connection = new PDO("mysql:host={$this->host}; dbname={$this->db}", $this->user, $this->password);
         }
 
         return $this->connection;
