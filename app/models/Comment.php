@@ -26,7 +26,7 @@ class Comment extends Model
      */
     public function getCommentsForArticle($articleId)
     {
-        $stm = $this->db->prepare("SELECT comments.id, comments.rate, comments.verified, comments.comment, users.email, users.id AS userId, comments.date FROM `comments` JOIN `users` WHERE comments.article_id = {$articleId} AND users.id = comments.user_id");
+        $stm = $this->db->prepare("SELECT comments.id, comments.rate, comments.verified, comments.comment, users.email, users.id AS userId, comments.date FROM `comments` JOIN `users` WHERE comments.article_id = {$articleId} AND users.id = comments.user_id ORDER BY comments.rate DESC");
         $stm->execute();
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }

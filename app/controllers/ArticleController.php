@@ -35,6 +35,9 @@ class ArticleController extends Controller
         return $this->getTemplate()->render('article/list', ['data' => $data]);
     }
 
+    /**
+     *
+     */
     public function actionAddcomment()
     {
         $comment = trim($_POST['comment']);
