@@ -13,7 +13,7 @@ class TestController
      */
     public function actionIndex($test=0)
     {
-        var_dump((new Comment())->getCommentsForArticle(3));
+
     }
 
 }

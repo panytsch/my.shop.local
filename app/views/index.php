@@ -55,3 +55,15 @@
         <?php } ?>
     </div>
 <?php } ?>
+
+<br>
+<h2>Top Users</h2>
+<br>
+
+<?php
+foreach ($topUsers as $user) { ?>
+    <div class="">
+        <h3><a href="/user/comments/?userId=<?=$user['id']?>"><?=$user['email']?></a></h3>
+        <h4>Count of comments: <?=$user['count']?></h4>
+    </div>
+<?php } ?>

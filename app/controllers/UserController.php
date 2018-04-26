@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Comment;
 use app\models\User;
+use components\Paginator;
 use components\web\Controller;
 use helpers\ResponseHelper;
 use helpers\SessionHelper;
@@ -81,5 +83,25 @@ class UserController extends Controller
             ResponseHelper::redirect('/');
         }
         return $this->getTemplate()->render('/user/registration');
+    }
+
+    /**
+     *
+     */
+    public function actionIndex()
+    {
+        ResponseHelper::redirect('/');
+    }
+
+    public function actionComments($userId = 1, $page = 1)
+    {
+        $itemPerPage = 5;
+        $modelA = new Comment();
+        $data = $modelA->getCommentsSliceByUser(($page-1)*$itemPerPage,$itemPerPage,$userId);
+
+        $paginator = new Paginator($modelA->getCountByUser($userId),$itemPerPage, $page);
+        $data['buttons'] = $paginator->buttons;
+//       empty($data[0])
+        return $this->getTemplate()->render('/comment/commentList', ['data' => $data]);
     }
 }

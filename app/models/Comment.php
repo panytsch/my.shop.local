@@ -52,4 +52,32 @@ class Comment extends Model
         $stm = $this->db->prepare("INSERT INTO `{$this->tableName}` (`article_id`, `comment`, `user_id`, `date`) VALUES ({$idArticle}, '{$comment}', {$idUser}, NOW())");
         $stm->execute();
     }
+
+    public function getTopUsers()
+    {
+        $stm = $this->db->prepare("SELECT COUNT(comments.user_id) as count, users.id, users.email FROM `comments` JOIN users ON comments.user_id = users.id GROUP BY user_id LIMIT 5");
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @param $minId
+     * @param $maxId
+     * @param $userId
+     * @return array
+     */
+    public function getCommentsSliceByUser($minId,$maxId, $userId)
+    {
+        $stm = $this->db->prepare("SELECT comment, date, rate, user_id FROM `{$this->tableName}` WHERE user_id = {$userId} LIMIT {$minId}, {$maxId}");
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getCountByUser($userId)
+    {
+        $stm = $this->db->prepare("SELECT COUNT(`user_id`) FROM `{$this->tableName}` WHERE user_id = {$userId}");
+        $stm->execute();
+        $data = $stm->fetchAll(PDO::FETCH_NUM);
+        return $data[0][0];
+    }
 }

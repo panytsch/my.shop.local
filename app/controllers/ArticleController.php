@@ -38,7 +38,6 @@ class ArticleController extends Controller
     public function actionAddcomment()
     {
         $comment = trim($_POST['comment']);
-//        var_dump($comment);die();
         if ($comment){
             $model = new Comment();
             $model->setComment($_POST['refer'], $comment, SessionHelper::getFlash('userId', false));

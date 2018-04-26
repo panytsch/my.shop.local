@@ -19,9 +19,7 @@ if (\helpers\SessionHelper::getFlash('user', false)){ ?>
 <form action="/article/addcomment" method="post">
     <div class="form-group">
         <label for="comment">Comment:</label>
-        <textarea class="form-control" rows="5" id="comment" name="comment" placeholder="Enter your comment here">
-
-        </textarea>
+        <textarea class="form-control" rows="5" id="comment" name="comment" placeholder="Enter your comment here"></textarea>
     </div>
     <input type="hidden" value="<?=$data['id']?>" name="refer">
     <button type="submit">Send</button>
