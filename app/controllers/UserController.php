@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Category;
 use app\models\Comment;
 use app\models\User;
 use components\Paginator;
@@ -17,6 +18,24 @@ class UserController extends Controller
             ResponseHelper::redirect('/');
         }
         return $this->getTemplate()->render('/user/loginForm');
+    }
+
+    /**
+     *
+     */
+    public function actionSearch($a = 'a')
+    {
+        $model = new Category();
+        $data = $model->getListLike($a);
+        if (!empty($data)) {
+            $result = '';
+            foreach ($data as $val) {
+                $result .= '<li><a href="/article/categories?category=' . $val['name'] . '">' . $val['name'] . '</a></li>';
+            }
+        } else {
+            $result = 'No match';
+        }
+        echo $result;
     }
 
     /**

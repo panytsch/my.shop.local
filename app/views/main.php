@@ -40,6 +40,19 @@ $success = SessionHelper::getFlash('success');
                     </ul>
                 </li>
                 <li><a href="/article/analitic">Analitic</a></li>
+                <li>
+                    <form action="search.php" method="post" name="form" onsubmit="return false;"
+                          class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <div class="btn-group">
+                                <input type="text" autocomplete="off" id="searchInput" data-toggle="dropdown" class="form-control"
+                                       placeholder="search by category"> </input>
+                                <ul id="resSearch" class="dropdown-menu">
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php
@@ -127,5 +140,6 @@ $success = SessionHelper::getFlash('success');
     </div>
 </div>
 <script src="/public/js/rek.js"></script>
+<script src="/public/js/search.js"></script>
 </body>
 </html>

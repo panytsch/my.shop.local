@@ -2,18 +2,24 @@
 
 namespace app\controllers;
 
-use app\models\Color;
-use app\models\Comment;
-use DateTime;
+use app\models\Category;
 
 class TestController
 {
-    /**
-     * @param int $test
-     */
-    public function actionIndex($test=0)
-    {
 
+    public function actionIndex($a = 'a')
+    {
+        $model = new Category();
+        $data = $model->getListLike($a);
+        if (!empty($data)){
+            $result = '';
+            foreach ($data as $val){
+                $result .= '<a href="/article/categories?category=' . $val['name'] . '">' . $val['name'] . '</a>';
+            }
+        } else {
+            $result = 'No match';
+        }
+        echo $result;
     }
 
 }

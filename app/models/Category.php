@@ -58,10 +58,25 @@ class Category extends Model
         return $stm->fetch()[0];
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getNameById($id)
     {
         $stm = $this->db->prepare("SELECT `name` FROM `{$this->tableName}` WHERE id = {$id}");
         $stm->execute();
         return $stm->fetch(PDO::FETCH_ASSOC)['name'];
+    }
+
+    /**
+     * @param $name
+     * @return array
+     */
+    public function getListLike($name)
+    {
+        $stm = $this->db->prepare("SELECT * FROM `{$this->tableName}` WHERE name LIKE '%{$name}%'");
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
 }
