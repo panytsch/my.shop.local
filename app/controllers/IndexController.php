@@ -26,6 +26,8 @@ class IndexController extends Controller
         $topUsers = $modelComment->getTopUsers();
         $lastest = (new Article())->getLastThreeArticle();
 
-        return $this->getTemplate()->render('index', ['categoryArray' => $data, 'lastestArticles' => $lastest, 'topUsers' => $topUsers]);
+        $topThemes = $model->getTopThreeThemes();
+//        var_dump($topThemes);die();
+        return $this->getTemplate()->render('index', ['categoryArray' => $data, 'lastestArticles' => $lastest, 'topUsers' => $topUsers, 'themes' => $topThemes]);
     }
 }

@@ -67,3 +67,14 @@ foreach ($topUsers as $user) { ?>
         <h4>Count of comments: <?=$user['count']?></h4>
     </div>
 <?php } ?>
+
+<br>
+<h2>Top Themes</h2>
+<br>
+
+<?php foreach ($themes as $theme) {?>
+    <div class="news">
+        <h3><a href="/article/categories?category=<?=$theme['id']?>" class="category__a"><?=$theme['category']?></a></h3>
+        <h4>Count of comments: <?=$theme['count']?></h4>
+    </div>
+<?php } ?>

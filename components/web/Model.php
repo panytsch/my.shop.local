@@ -22,6 +22,16 @@ class Model
     }
 
     /**
+     * @return array
+     */
+    public function getTopThreeThemes()
+    {
+        $stm = $this->db->prepare("SELECT COUNT(comments.id) as count, categories.name as category, categories.id as id FROM `comments` JOIN articles ON comments.article_id = articles.id JOIN categories ON articles.category_id = categories.id GROUP BY category LIMIT 5");
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * @param $field
      * @return array
      */
