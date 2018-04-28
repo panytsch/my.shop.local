@@ -6,11 +6,10 @@ namespace app\controllers;
 use app\models\Article;
 use app\models\Category;
 use app\models\Color;
+use app\models\Reklama;
 use components\Paginator;
-use \components\web\Application;
 use app\models\User;
 use components\web\Controller;
-use components\web\Model;
 use helpers\FilesHelper;
 use helpers\ResponseHelper;
 use helpers\SessionHelper;
@@ -32,6 +31,51 @@ class AdminController extends Controller
     public function actionColor()
     {
         return $this->getTemplate()->render('/admin/color');
+    }
+
+    /**
+     * @return string
+     */
+    public function actionReklamapanel()
+    {
+        return $this->getTemplate()->render('/admin/reklamapanel');
+    }
+
+
+    public function actionDeleteBlock($id)
+    {
+        if (SessionHelper::getFlash('admin', false) === true){
+            $model = new Reklama();
+            $model->delete($id);
+            ResponseHelper::redirect('/admin/reklamalist');
+        } else {
+            ResponseHelper::redirect('/');
+        }
+    }
+    /**
+     * @return string
+     */
+    public function actionReklamaList()
+    {
+        $model = new Reklama();
+        $data = $model->getAll('*');
+        return $this->getTemplate()->render('/admin/reklamalist', ['data' => $data]);
+    }
+    /**
+     *
+     */
+    public function actionAddreklama()
+    {
+        if (empty($_POST['text']) || empty($_POST['price']) || empty($_POST['url'])){
+            ResponseHelper::redirect('/admin/reklamapanel');
+        }else {
+            $text = $_POST['text'];
+            $price = floatval($_POST['price']);
+            $url = $_POST['url'];
+            $model = new Reklama();
+            $model->addNew($text, $price, $url);
+            ResponseHelper::redirect('/admin/reklamapanel');
+        }
     }
 
     /**

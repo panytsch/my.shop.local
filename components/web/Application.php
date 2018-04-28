@@ -3,6 +3,7 @@
 namespace components\web;
 
 use app\models\Color;
+use app\models\Reklama;
 use Exception;
 use exceptions\NotAuthorisedException;
 use components\Config;
@@ -19,6 +20,7 @@ class Application extends \components\Application
     {
         $dispatcher = new Dispatcher();
         define('COLOR', (new Color())->getColor());
+        define('REKLAMA', (new Reklama())->getAll('*'));
         try {
             return (new Router($dispatcher))->init();
         } catch (NotAuthorisedException $exception) {

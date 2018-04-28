@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\models\Color;
 use app\models\Article;
 use app\models\Category;
 use app\models\Comment;
@@ -26,6 +25,7 @@ class IndexController extends Controller
         $modelComment = new Comment();
         $topUsers = $modelComment->getTopUsers();
         $lastest = (new Article())->getLastThreeArticle();
+
         return $this->getTemplate()->render('index', ['categoryArray' => $data, 'lastestArticles' => $lastest, 'topUsers' => $topUsers]);
     }
 }

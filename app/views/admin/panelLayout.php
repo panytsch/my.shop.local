@@ -21,6 +21,8 @@
             <li><a href="/admin/categorylist">Categories List</a></li>
             <li><a href="/admin/color">Set Color</a></li>
             <li><a href="/admin/logout">Logout</a></li>
+            <li><a href="/admin/reklamapanel">Reklama</a></li>
+            <li><a href="/admin/reklamaList">Reklama List</a></li>
         </ul>
     </div>
 </nav>

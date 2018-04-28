@@ -22,6 +22,16 @@ class Model
     }
 
     /**
+     * @param $field
+     * @return array
+     */
+    public function getAll($field){
+        $stm = $this->db->prepare("SELECT {$field} FROM `{$this->tableName}`");
+        $stm->execute();
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+    /**
      * @param $title
      * @return array
      */

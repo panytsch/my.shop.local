@@ -80,19 +80,24 @@ $success = SessionHelper::getFlash('success');
 <div class="container-fluid">
     <div class="col-sm-3">
         <div class="rek__item">
-            <h3>Buy tickets!</h3><br>
-            <p>price only <span class="price">500</span> UAH </p>
-            <a href="#">details</a>
+            <h3><?=REKLAMA[0]['text']?></h3>
+            <p>price only <span class="price"><?=REKLAMA[0]['price']?></span> UAH </p>
+            <a href="<?=REKLAMA[0]['url']?>" target="_blank">details</a>
         </div>
         <div class="rek__item">
-            <h3>Buy tickets!</h3><br>
-            <p>price only <span class="price">500</span> UAH </p>
-            <a href="#">details</a>
+            <h3><?=REKLAMA[1]['text']?></h3>
+            <p>price only <span class="price"><?=REKLAMA[1]['price']?></span> UAH </p>
+            <a href="<?=REKLAMA[1]['url']?>" target="_blank">details</a>
         </div>
         <div class="rek__item">
-            <h3>Buy tickets!</h3><br>
-            <p>price only <span class="price">500</span> UAH </p>
-            <a href="#">details</a>
+            <h3><?=REKLAMA[2]['text']?></h3>
+            <p>price only <span class="price"><?=REKLAMA[2]['price']?></span> UAH </p>
+            <a href="<?=REKLAMA[2]['url']?>" target="_blank">details</a>
+        </div>
+        <div class="rek__item">
+            <h3><?=REKLAMA[3]['text']?></h3>
+            <p>price only <span class="price"><?=REKLAMA[3]['price']?></span> UAH </p>
+            <a href="<?=REKLAMA[3]['url']?>" target="_blank">details</a>
         </div>
     </div>
     <div class="col-sm-6">
@@ -100,19 +105,24 @@ $success = SessionHelper::getFlash('success');
     </div>
     <div class="col-sm-3">
         <div class="rek__item">
-            <h3>Buy tickets!</h3><br>
-            <p>price only <span class="price">500</span> UAH </p>
-            <a href="#">details</a>
+            <h3><?=REKLAMA[4]['text']?></h3>
+            <p>price only <span class="price"><?=REKLAMA[4]['price']?></span> UAH </p>
+            <a href="<?=REKLAMA[4]['url']?>" target="_blank">details</a>
         </div>
         <div class="rek__item">
-            <h3>Buy tickets!</h3><br>
-            <p>price only <span class="price">500</span> UAH </p>
-            <a href="#">details</a>
+            <h3><?=REKLAMA[5]['text']?></h3>
+            <p>price only <span class="price"><?=REKLAMA[5]['price']?></span> UAH </p>
+            <a href="<?=REKLAMA[5]['url']?>" target="_blank">details</a>
         </div>
         <div class="rek__item">
-            <h3>Buy tickets!</h3><br>
-            <p>price only <span class="price">500</span> UAH </p>
-            <a href="#">details</a>
+            <h3><?=REKLAMA[6]['text']?></h3>
+            <p>price only <span class="price"><?=REKLAMA[6]['price']?></span> UAH </p>
+            <a href="<?=REKLAMA[6]['url']?>" target="_blank">details</a>
+        </div>
+        <div class="rek__item">
+            <h3><?=REKLAMA[7]['text']?></h3>
+            <p>price only <span class="price"><?=REKLAMA[7]['price']?></span> UAH </p>
+            <a href="<?=REKLAMA[7]['url']?>" target="_blank">details</a>
         </div>
     </div>
 </div>
