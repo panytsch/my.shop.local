@@ -23,6 +23,7 @@
             <li><a href="/admin/logout">Logout</a></li>
             <li><a href="/admin/reklamapanel">Reklama</a></li>
             <li><a href="/admin/reklamaList">Reklama List</a></li>
+            <li><a href="/admin/comments">Comments</a></li>
         </ul>
     </div>
 </nav>

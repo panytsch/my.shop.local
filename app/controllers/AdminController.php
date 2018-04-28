@@ -6,6 +6,7 @@ namespace app\controllers;
 use app\models\Article;
 use app\models\Category;
 use app\models\Color;
+use app\models\Comment;
 use app\models\Reklama;
 use components\Paginator;
 use app\models\User;
@@ -41,6 +42,45 @@ class AdminController extends Controller
         return $this->getTemplate()->render('/admin/reklamapanel');
     }
 
+    public function actionChangeComment()
+    {
+        if (empty($_POST)){
+            ResponseHelper::redirect('/admin');
+        } else{
+            $comment = $_POST['comment'];
+            $id = $_POST['id'];
+            $verified = empty($_POST['verified']) ? 0 : 1;
+            $model = new Comment();
+            $model->changeCommentById($id,$comment,$verified);
+            ResponseHelper::redirect('/admin/comments');
+        }
+    }
+
+    /**
+     * @param $id
+     * @return string
+     */
+    public function actionEditComment($id)
+    {
+        $model = new Comment();
+        $data = $model->getCommentById($id);
+        return $this->getTemplate()->render('admin/commentEditor', ['data' => $data]);
+    }
+
+    public function actionDeleteComment($id)
+    {
+
+    }
+
+    /**
+     * @return string
+     */
+    public function actionComments()
+    {
+        $model = new Comment();
+        $data = $model->getAllCommentsSortVer();
+        return $this->getTemplate()->render('/admin/comments', ['data' => $data]);
+    }
 
     public function actionDeleteBlock($id)
     {

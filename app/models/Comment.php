@@ -73,11 +73,46 @@ class Comment extends Model
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * @param $userId
+     * @return mixed
+     */
     public function getCountByUser($userId)
     {
         $stm = $this->db->prepare("SELECT COUNT(`user_id`) FROM `{$this->tableName}` WHERE user_id = {$userId}");
         $stm->execute();
         $data = $stm->fetchAll(PDO::FETCH_NUM);
         return $data[0][0];
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getCommentById($id)
+    {
+        $stm = $this->db->prepare("SELECT * FROM `{$this->tableName}` WHERE id = {$id}");
+        $stm->execute();
+        $data = $stm->fetch(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    /**
+     * @param $id
+     * @param $comment
+     * @param $verified
+     */
+    public function changeCommentById($id, $comment, $verified)
+    {
+        $stm = $this->db->prepare("UPDATE `{$this->tableName}` SET comment = '{$comment}', verified = {$verified} WHERE id = {$id}");
+        $stm->execute();
+    }
+
+
+    public function getAllCommentsSortVer(){
+        $stm = $this->db->prepare("SELECT * FROM `{$this->tableName}` ORDER BY verified");
+        $stm->execute();
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
     }
 }

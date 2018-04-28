@@ -27,7 +27,9 @@ if (\helpers\SessionHelper::getFlash('user', false)){ ?>
 <?php } ?>
 
 <?php
-foreach ($data['comments'] as $comment) { ?>
+foreach ($data['comments'] as $comment) {
+    if (!$comment['verified'] && $data['category'] === 'Politic') continue;
+    ?>
     <div class="media">
         <div class="media-left media-top">
             <img src="/public/upload/img_avatar1.png" class="media-object" style="width:80px">

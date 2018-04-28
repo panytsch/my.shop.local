@@ -57,4 +57,11 @@ class Category extends Model
         $stm->execute();
         return $stm->fetch()[0];
     }
+
+    public function getNameById($id)
+    {
+        $stm = $this->db->prepare("SELECT `name` FROM `{$this->tableName}` WHERE id = {$id}");
+        $stm->execute();
+        return $stm->fetch(PDO::FETCH_ASSOC)['name'];
+    }
 }

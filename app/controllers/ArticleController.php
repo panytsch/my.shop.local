@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Category;
 use app\models\Comment;
 use components\Paginator;
 use components\web\Controller;
@@ -32,6 +33,7 @@ class ArticleController extends Controller
             $data['description'] = substr($data['description'],0,350).'...(<a href="/user/login">login to continue</a>)';
         }
         $data['comments'] = (new Comment())->getCommentsForArticle($id);
+        $data['category'] = (new Category())->getNameById($data['category_id']);
         return $this->getTemplate()->render('article/list', ['data' => $data]);
     }
 
