@@ -29,7 +29,7 @@ class ArticleController extends Controller
         $model = new Article();
         $data = $model->getArticle($id);
         $model->setView($id);
-        if (SessionHelper::getFlash('admin', false) == false && SessionHelper::getFlash('user', false) == false){
+        if (SessionHelper::getFlash('admin', false) == false && SessionHelper::getFlash('user', false) == false && $data['analitic'] == 1){
             $data['description'] = substr($data['description'],0,350).'...(<a href="/user/login">login to continue</a>)';
         }
         $data['comments'] = (new Comment())->getCommentsForArticle($id);

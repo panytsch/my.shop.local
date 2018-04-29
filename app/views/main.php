@@ -19,9 +19,7 @@ $success = SessionHelper::getFlash('success');
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/public/js/js.js" defer></script>
     <script>
-//        window.onbeforeunload = function(e) {
-//            return 'are u sure?';
-//        };
+       window.onbeforeunload = () => 'are u sure?';
     </script>
 </head>
 <body style="background-color: <?=COLOR?>">
@@ -67,24 +65,26 @@ $success = SessionHelper::getFlash('success');
         </div>
     </nav>
 </header>
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: none" id="modalbtnmegaid">Open Modal</button>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: none" id="supermodal">Open Modal</button>
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Join to us</h4>
             </div>
             <div class="modal-body">
-                <p>Some text in the modal.</p>
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control" id="email"><br>
+                <label for="name">Fist & Last Name</label>
+                <input type="text" class="form-control" id="name">
             </div>
             <div class="modal-footer">
-                <label for="modalbtnmegaidif">Don't show me again</label>
-                <input type="checkbox" id="modalbtnmegaidif">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
             </div>
         </div>
 
@@ -141,5 +141,6 @@ $success = SessionHelper::getFlash('success');
 </div>
 <script src="/public/js/rek.js"></script>
 <script src="/public/js/search.js"></script>
+<script src="/public/js/modal.js"></script>
 </body>
 </html>
