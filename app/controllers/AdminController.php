@@ -11,6 +11,7 @@ use app\models\Reklama;
 use components\Paginator;
 use app\models\User;
 use components\web\Controller;
+use components\web\Model;
 use helpers\FilesHelper;
 use helpers\ResponseHelper;
 use helpers\SessionHelper;
@@ -23,7 +24,16 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->getTemplate()->setLayout('admin/panelLayout');
+    }
 
+    /**
+     *
+     */
+    public function check()
+    {
+        if (SessionHelper::getFlash('admin', false) == false){
+            ResponseHelper::redirect('/admin');
+        }
     }
 
     /**
@@ -31,6 +41,7 @@ class AdminController extends Controller
      */
     public function actionColor()
     {
+        $this->check();
         return $this->getTemplate()->render('/admin/color');
     }
 
@@ -39,6 +50,7 @@ class AdminController extends Controller
      */
     public function actionReklamapanel()
     {
+        $this->check();
         return $this->getTemplate()->render('/admin/reklamapanel');
     }
 
@@ -67,9 +79,15 @@ class AdminController extends Controller
         return $this->getTemplate()->render('admin/commentEditor', ['data' => $data]);
     }
 
+    /**
+     * @param $id
+     */
     public function actionDeleteComment($id)
     {
-
+        $this->check();
+        $model = new Comment();
+        $model->deleteById($id);
+        ResponseHelper::redirect('/admin/comments');
     }
 
     /**
@@ -77,6 +95,7 @@ class AdminController extends Controller
      */
     public function actionComments()
     {
+        $this->check();
         $model = new Comment();
         $data = $model->getAllCommentsSortVer();
         return $this->getTemplate()->render('/admin/comments', ['data' => $data]);
@@ -97,6 +116,7 @@ class AdminController extends Controller
      */
     public function actionReklamaList()
     {
+        $this->check();
         $model = new Reklama();
         $data = $model->getAll('*');
         return $this->getTemplate()->render('/admin/reklamalist', ['data' => $data]);
@@ -123,6 +143,9 @@ class AdminController extends Controller
      */
     public function actionSetcolor()
     {
+        if (SessionHelper::getFlash('admin', false) == false){
+            ResponseHelper::redirect('/admin');
+        }
         if (empty($_POST) && empty($_POST['color'])){
             ResponseHelper::redirect('/admin/color');
         } else {

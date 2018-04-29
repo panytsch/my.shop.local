@@ -32,6 +32,15 @@ class Model
     }
 
     /**
+     * @param $id
+     */
+    public function deleteById($id)
+    {
+        $stm = $this->db->prepare("DELETE FROM `{$this->tableName}` WHERE `id` = {$id}");
+        $stm->execute();
+    }
+
+    /**
      * @param $field
      * @return array
      */

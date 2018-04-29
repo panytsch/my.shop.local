@@ -108,11 +108,14 @@ class Comment extends Model
         $stm->execute();
     }
 
-
+    /**
+     * @return array
+     */
     public function getAllCommentsSortVer(){
         $stm = $this->db->prepare("SELECT * FROM `{$this->tableName}` ORDER BY verified");
         $stm->execute();
         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
+
 }
