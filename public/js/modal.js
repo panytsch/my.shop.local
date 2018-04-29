@@ -12,5 +12,5 @@ let arr = a.getElementsByTagName('button');
 });
 
 if (!window.localStorage.closed){
-    setTimeout(clickModal, 1000);
+    setTimeout(clickModal, 15000);
 }

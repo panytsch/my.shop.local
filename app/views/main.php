@@ -18,9 +18,6 @@ $success = SessionHelper::getFlash('success');
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/public/js/js.js" defer></script>
-    <script>
-       window.onbeforeunload = () => 'are u sure?';
-    </script>
 </head>
 <body style="background-color: <?=COLOR?>">
 <header>
